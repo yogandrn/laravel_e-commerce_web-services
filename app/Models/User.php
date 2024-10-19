@@ -15,7 +15,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable;
 
     protected $table = 'users';
     protected $primary = 'id';
@@ -59,6 +59,11 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public static function isExist($value) : bool {
+        $countUser = User::where('email', $value)->orWhere('phone_number', $value)->sharedLock()->count();
+        return $countUser === 0 ? false : true;
     }
 
 

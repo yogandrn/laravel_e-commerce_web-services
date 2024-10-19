@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Formatter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,12 +27,22 @@ class Transaction extends Model
         'status',
     ];
 
+    protected $with = [];
+
+    protected function getCreatedAtAttribute($value) {
+        return Formatter::datetimeFormat($value);
+    }
+
+    protected function getUpdatedAtAttribute($value) {
+        return Formatter::datetimeFormat($value);
+    }
+
     // handle generate unique code
-    public function generateOrderCode() : string {
+    public static function generateOrderCode() : string {
         $date = Carbon::now()->format('ymd');
         do {
             $result = $date . Str::upper(Str::random(4));
-        } while (self::where('order_code', $result)->exists());
+        } while (self::where('order_code', $result)->sharedLock()->exists());
 
         return $result;
     } 

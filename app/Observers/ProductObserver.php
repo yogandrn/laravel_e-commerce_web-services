@@ -14,7 +14,7 @@ class ProductObserver
      */
     public function created(Product $product): void
     {
-        Cache::delete('products');
+        Cache::forget('products');
     }
     
     /**
@@ -22,7 +22,7 @@ class ProductObserver
      */
     public function updated(Product $product): void
     {
-        Cache::delete('products');
+        Cache::forget('products');
     }
     
     /**
@@ -30,7 +30,7 @@ class ProductObserver
      */
     public function deleted(Product $product): void
     {
-        Cache::delete('products');
+        Cache::forget('products');
 
         // delete all pictures file from relation
         foreach ($product->pictures as $picture ) {

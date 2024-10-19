@@ -28,6 +28,18 @@ class Category extends Model
         return $slug;
     }
 
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = $value;
+        
+        if ($this->exists && $this->name === $value) {
+            return; // stop here
+        }
+
+        $slug = $this->generateUniqueSlug($value);
+
+        $this->slug = $slug;
+    }
+
     public function getCreatedAtAttribute($value) {
         return Formatter::datetimeFormat($value);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Formatter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,6 +12,14 @@ class ProductPicture extends Model
     protected $primary = 'id';
 
     protected $fillable = ['product_id', 'image_url'];
+
+    public function getCreatedAtAttribute($value) {
+        return Formatter::datetimeFormat($value);
+    }
+
+    public function getUpdatedAtAttribute($value) {
+        return Formatter::datetimeFormat($value);
+    }
 
     // handle uploading file
 

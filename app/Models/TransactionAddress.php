@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Formatter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -18,6 +19,13 @@ class TransactionAddress extends Model
         'postal_code',
     ];
 
+    public function getCreatedAtAttribute($value) {
+        return Formatter::datetimeFormat($value);
+    }
+
+    public function getUpdatedAtAttribute($value) {
+        return Formatter::datetimeFormat($value);
+    }
 
     // table relations
     public function transaction() : BelongsTo {

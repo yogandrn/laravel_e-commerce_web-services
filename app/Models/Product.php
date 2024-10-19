@@ -26,6 +26,8 @@ class Product extends Model
         'weight',
     ];
 
+    protected $with = [];
+
     // handling generate slug
     public function generateUniqueSlug($value) : string {
         // generate slug
@@ -38,6 +40,18 @@ class Product extends Model
         if ($countSlug > 0) { $slug .= '-' . $countSlug; }
 
         return $slug;
+    }
+
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = $value;
+        
+        if ($this->exists && $this->name === $value) {
+            return; // stop here
+        }
+
+        $slug = $this->generateUniqueSlug($value);
+
+        $this->slug = $slug;
     }
 
     public function getCreatedAtAttribute($value) {

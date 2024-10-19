@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('order_code')->unique();
             $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('subtotal');
-            $table->integer('delivery_fee');
-            $table->integer('additional_fee');
-            $table->integer('total');
+            $table->integer('subtotal')->default(0);
+            $table->integer('delivery_fee')->default(0);
+            $table->integer('additional_fee')->default(0);
+            $table->integer('total')->default(0);
             $table->string('payment_url')->nullable();
             $table->string('receipt_code')->nullable();
-            $table->enum('status', ['ON_CART', 'PENDING', 'ON_DELIVERY', 'SUCCESS', 'CANCELED']);
+            $table->enum('status', ['ON_CART', 'PENDING', 'ON_DELIVERY', 'SUCCESS', 'CANCELED'])->default('PENDING');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

@@ -12,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\BulkActionGroup;
@@ -120,7 +121,8 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Nama produk')->searchable(),
+                TextColumn::make('name')->label('Nama produk')
+                    ->searchable(),
 
                 ImageColumn::make('thumbnail'),
 
@@ -141,7 +143,7 @@ class ProductResource extends Resource
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),
-                ViewAction::make(),
+                // ViewAction::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -164,7 +166,6 @@ class ProductResource extends Resource
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
-            'view' => Pages\ViewProduct::route('/{record}'),
         ];
     }
 }

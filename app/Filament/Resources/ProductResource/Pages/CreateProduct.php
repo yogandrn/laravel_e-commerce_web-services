@@ -10,9 +10,9 @@ class CreateProduct extends CreateRecord
 {
     protected static string $resource = ProductResource::class;
 
-    protected function getRedirectUrl(): string
-    {
-        // Redirect ke halaman index/list setelah action berhasil
-        return $this->getResource()::getUrl('edit');
-    }
+    // protected function getRedirectUrl(): string
+    // {
+    //     // Redirect ke halaman index/list setelah action berhasil
+    //     return $this->getResource()::getUrl('edit');
+    // }
 }
