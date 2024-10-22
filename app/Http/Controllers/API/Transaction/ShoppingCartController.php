@@ -35,9 +35,18 @@ class ShoppingCartController extends Controller
                 });
             }
             
-            $cartItems = $shoppingCart->items;
+            // update subtotal cart item sesuai data product
+            DB::transaction(function () use ($shoppingCart) {
+                foreach ($shoppingCart->items as $item) {
+                    $subtotal = intval($item->product->price * $item->quantity);
+                    $item->subtotal = $subtotal;
+                    $item->save();
+                }
+            });
+
+            $result = $shoppingCart->items;
             
-            return Formatter::responseJson(200, 'Berhasil mendapatkan data keranjang belanja.', $cartItems);
+            return Formatter::responseJson(200, 'Berhasil mendapatkan data keranjang belanja.', $result);
             
         } catch (Exception $e) {
             return Formatter::responseJson(500, $e->getMessage());
@@ -96,8 +105,8 @@ class ShoppingCartController extends Controller
 
                 // jika sudah ada, ubah datanya
                 if ($existItem) {
-                    $existItem->quantity = $existItem->quantity + intval($request->quantity);
-                    $existItem->subtotal = $existItem->subtotal + $subtotal;
+                    $existItem->quantity += intval($request->quantity);
+                    $existItem->subtotal += $subtotal;
                     $existItem->save();
                 } else {
                     // jika belum, tambahkan item baru
@@ -109,8 +118,8 @@ class ShoppingCartController extends Controller
                     ]);
                 }
                 // update nominal transaksi
-                $shoppingCart->subtotal = intval($shoppingCart->subtotal + $subtotal);
-                $shoppingCart->total = intval($shoppingCart->total + $subtotal);
+                $shoppingCart->subtotal += $subtotal;
+                $shoppingCart->total += $subtotal;
                 $shoppingCart->save();
             });
             
@@ -194,18 +203,13 @@ class ShoppingCartController extends Controller
 
             // db transaction
             DB::transaction(function () use ($id, $cartItem) {
-                // ubah subtotal dan total transaksi
-                // $Transaction::where('id', $cartItem->transaction_id)->update([
-                //     'subtotal' => ,
-                //     'total' => ,
-                // ])
-                $cartItem->transaction->subtotal = intval($cartItem->transaction->subtotal) - $cartItem->product->price;
-                $cartItem->transaction->total = intval($cartItem->transaction->total) - $cartItem->product->price;
+                $cartItem->transaction->subtotal -= $cartItem->product->price;
+                $cartItem->transaction->total -= $cartItem->product->price;
                 $cartItem->transaction->save();
                 
                 // ubah jumlah item cart
-                $cartItem->subtotal = intval($cartItem->subtotal- $cartItem->product->price);
-                $cartItem->quantity = intval($cartItem->quantity - 1);
+                $cartItem->subtotal -= $cartItem->product->price;
+                $cartItem->quantity -= 1;
                 $cartItem->save();
             });
             

@@ -16,7 +16,7 @@ class ProductController extends Controller
         try {
             $cacheTTL = 120;
             $products = Cache::remember('products', $cacheTTL, function() {
-                return Product::with('category')->all();
+                return Product::with('category')->get();
             });
 
             // filter products
@@ -46,6 +46,21 @@ class ProductController extends Controller
             }
 
             return Formatter::responseJson(200, 'Berhasil mendapatkan data produk', $products->values());
+            
+        } catch (Exception $e) {
+            return Formatter::responseJson(500, $e->getMessage());
+        }
+    }
+
+    public function getProductBySlug($slug) : JsonResponse {
+        try {
+            $product = Product::with('pictures:id,product_id,image_url')->where('slug', $slug)->sharedLock()->first();
+
+            if (!$product) {
+                return Formatter::responseJson(404, 'Data produk tidak ditemukan!');
+            }
+
+            return Formatter::responseJson(200, 'Berhasil mendapatkan data produk.', $product);
             
         } catch (Exception $e) {
             return Formatter::responseJson(500, $e->getMessage());

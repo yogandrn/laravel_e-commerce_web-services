@@ -123,4 +123,8 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'rajaongkir' => [
+        'apikey' => env('RAJA_ONGKIR_API_KEY'),
+    ]
+
 ];

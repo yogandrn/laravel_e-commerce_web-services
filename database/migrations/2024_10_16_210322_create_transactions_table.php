@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('delivery_fee')->default(0);
             $table->integer('additional_fee')->default(0);
             $table->integer('total')->default(0);
+            $table->string('thumbnail')->nullable();
             $table->string('payment_url')->nullable();
             $table->string('receipt_code')->nullable();
             $table->enum('status', ['ON_CART', 'PENDING', 'ON_DELIVERY', 'SUCCESS', 'CANCELED'])->default('PENDING');

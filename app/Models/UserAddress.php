@@ -20,6 +20,11 @@ class UserAddress extends Model
         'user_id',
     ];
 
+    public static function hasAddress($userId): bool {
+        $isExist = self::where('user_id', $userId)->sharedLock()->first();
+        return !$isExist ? false : true;
+    }
+
     public function getCreatedAtAttribute($value) {
         return Formatter::datetimeFormat($value);
     }

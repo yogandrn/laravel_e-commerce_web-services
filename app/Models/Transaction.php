@@ -22,6 +22,7 @@ class Transaction extends Model
         'delivery_fee',
         'additional_fee',
         'total',
+        'thumbnail',
         'payment_url',
         'receipt_code',
         'status',
