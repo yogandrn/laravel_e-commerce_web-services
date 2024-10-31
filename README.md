@@ -84,5 +84,8 @@ Proyek ini adalah layanan web e-commerce yang dibangun menggunakan Laravel. Dike
 
 ## Instalasi
 1. Clone repositori ini
-2. Copy file ```bash .env
+2. Copy file .env.example ke file .env
+3. Jalankan composer install
+4. Jalankan php artisan migrate
+5. Ketik perintah php artisan serve
 
