@@ -68,12 +68,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # E-Commerce Web Service with Laravel
 
-Proyek ini adalah layanan web e-commerce yang dibangun menggunakan Laravel. Dikembangkan sebagai bagian dari portofolio saya sebagai Backend Engineer, proyek ini menyediakan RESTful API untuk frontend dan dilengkapi dasbor admin untuk manajemen data.
+Proyek ini adalah layanan web e-commerce yang dibangun menggunakan Laravel. Dikembangkan sebagai bagian dari portofolio saya sebagai Backend Engineer. Proyek ini menyediakan RESTful API untuk frontend dan dilengkapi dasbor admin untuk manajemen data. Selain itu, proyek ini juga terintegrasi dengan library pihak ketiga seperti Midtrans Payment Gateway dan RajaOngkir API.
 
 ## Fitur Utama
 - **Admin Dashboard**: Menggunakan **Filament** sebagai UI framework untuk dasbor admin, yang memungkinkan pengelolaan produk, kategori, pesanan, dan pengguna.
 - **REST API untuk Frontend**: API RESTful yang mendukung autentikasi berbasis **JWT OAuth 2.0** untuk pengelolaan akun, produk, keranjang, pesanan, dan fungsi e-commerce lainnya.
-- **Basis Data MySQL**: Sistem manajemen basis data yang efisien untuk menyimpan data pengguna, produk, dan transaksi.
+- **Integrasi Midtrans Payment Gateway**: Menggunakan Midtrans untuk memproses pembayaran dengan aman dan mendukung berbagai metode pembayaran.
+- **API RajaOngkir**: Menghitung ongkos kirim berdasarkan tujuan pengiriman menggunakan integrasi dengan API RajaOngkir.
 
 ## Teknologi yang Digunakan
 - **Laravel**: Framework PHP untuk aplikasi web yang kuat dan fleksibel.
@@ -82,5 +83,6 @@ Proyek ini adalah layanan web e-commerce yang dibangun menggunakan Laravel. Dike
 - **MySQL**: Basis data relasional yang dioptimalkan untuk aplikasi e-commerce.
 
 ## Instalasi
-1. Clone repositori ini:
+1. Clone repositori ini
+2. Copy file ```bash .env
 
