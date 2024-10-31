@@ -64,3 +64,23 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+# E-Commerce Web Service with Laravel
+
+Proyek ini adalah layanan web e-commerce yang dibangun menggunakan Laravel. Dikembangkan sebagai bagian dari portofolio saya sebagai Backend Engineer, proyek ini menyediakan RESTful API untuk frontend dan dilengkapi dasbor admin untuk manajemen data.
+
+## Fitur Utama
+- **Admin Dashboard**: Menggunakan **Filament** sebagai UI framework untuk dasbor admin, yang memungkinkan pengelolaan produk, kategori, pesanan, dan pengguna.
+- **REST API untuk Frontend**: API RESTful yang mendukung autentikasi berbasis **JWT OAuth 2.0** untuk pengelolaan akun, produk, keranjang, pesanan, dan fungsi e-commerce lainnya.
+- **Basis Data MySQL**: Sistem manajemen basis data yang efisien untuk menyimpan data pengguna, produk, dan transaksi.
+
+## Teknologi yang Digunakan
+- **Laravel**: Framework PHP untuk aplikasi web yang kuat dan fleksibel.
+- **Filament**: Library modern untuk membangun dasbor admin yang mudah digunakan.
+- **JWT (JSON Web Token)**: Protokol autentikasi yang aman untuk melindungi akses data API.
+- **MySQL**: Basis data relasional yang dioptimalkan untuk aplikasi e-commerce.
+
+## Instalasi
+1. Clone repositori ini:
+
